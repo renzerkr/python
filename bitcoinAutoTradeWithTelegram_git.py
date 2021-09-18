@@ -50,34 +50,34 @@ print("autotrade start")
 # start msg telegram send
 text = 'autotrade start'
 bot.sendMessage(chat_id = chat_id , text=text)
-tmp_target_price = get_target_price("KRW-BTT", 0.5)
-tmp_ma15 = get_ma15("KRW-BTT")
-text="BTT targe_price:"+str(tmp_target_price)+"ma15:"+str(tmp_ma15)
+tmp_target_price = get_target_price("KRW-BTC", 0.5)
+tmp_ma15 = get_ma15("KRW-BTC")
+text="BTC targe_price:"+str(tmp_target_price)+"ma15:"+str(tmp_ma15)
 bot.sendMessage(chat_id = chat_id , text=text)
 
 while True:
     try:
         now = datetime.datetime.now()
-        start_time = get_start_time("KRW-BTT")
+        start_time = get_start_time("KRW-BTC")
         end_time = start_time + datetime.timedelta(days=1)
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_target_price("KRW-BTT", 0.5)
-            ma15 = get_ma15("KRW-BTT")
-            current_price = get_current_price("KRW-BTT")
+            target_price = get_target_price("KRW-BTC", 0.5)
+            ma15 = get_ma15("KRW-BTC")
+            current_price = get_current_price("KRW-BTC")
             if target_price < current_price and ma15 < current_price:
                 krw = get_balance("KRW")
                 if krw > 5000:
-                    buy_result = upbit.buy_market_order("KRW-BTT", krw*0.9995)
-                    text="BTC(BTT) buy : " +str(buy_result)
+                    buy_result = upbit.buy_market_order("KRW-BTC", krw*0.9995)
+                    text="BTC(BTC) buy : " +str(buy_result)
                     bot.sendMessage(chat_id = chat_id , text=text)
         else:
-            btc = get_balance("BTT")
+            btc = get_balance("BTC")
             #starting new day
 
             if btc > 0.00008:
-                sell_result = upbit.sell_market_order("KRW-BTT", btc*0.9995)
-                text="BTC(BTT) sell : " +str(sell_result)
+                sell_result = upbit.sell_market_order("KRW-BTC", btc*0.9995)
+                text="BTC(BTC) sell : " +str(sell_result)
                 bot.sendMessage(chat_id = chat_id , text=text)
         time.sleep(1)
     except Exception as e:
