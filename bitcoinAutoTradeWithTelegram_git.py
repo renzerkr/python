@@ -82,6 +82,6 @@ while True:
         time.sleep(1)
     except Exception as e:
         print(e)
-        text="exc error=" + e
+        text="exc error=" + str(e)
         bot.sendMessage(chat_id = chat_id , text=text)
         time.sleep(1)
